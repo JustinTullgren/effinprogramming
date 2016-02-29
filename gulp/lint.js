@@ -1,8 +1,6 @@
-const lint = require('gulp-eslint');
-
-module.exports = (gulp, config) =>
+module.exports = (gulp, plugins, config) =>
 	() =>
-		gulp.src(config.js)
-			.pipe(lint(config.lintrc))
-			.pipe(lint.format())
-			.pipe(lint.failAfterError());
+		gulp.src(config.paths.js)
+			.pipe(plugins.eslint(config.lintrc))
+			.pipe(plugins.eslint.format())
+			.pipe(plugins.eslint.failAfterError());

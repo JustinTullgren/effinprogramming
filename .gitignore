@@ -35,4 +35,5 @@ node_modules
 # Webstorm
 .idea
 
-app/js/dist
+# built output
+dist

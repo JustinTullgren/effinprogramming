@@ -1,12 +1,16 @@
+'use strict';
 const browserSync = require('browser-sync').create();
 
-module.exports = (gulp, config) =>
-	() => {
+module.exports = (gulp, plugins, config) => {
+	let f = () => {
 		browserSync.init({
 			server: {
-				baseDir: config.dest,
+				baseDir: config.dest.root,
 				reloadOnRestart: true
 			}
 		});
-		gulp.watch(config.syncFiles).on('change', browserSync.reload);
 	};
+
+	f.reload = browserSync.reload;
+	return f;
+}
