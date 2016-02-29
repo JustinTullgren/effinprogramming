@@ -1,5 +1,5 @@
 # effinprogramming
-Effing Programming Talk 
+Effin Programming Talk 
 
 
 ## Install/Usage:
