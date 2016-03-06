@@ -18,4 +18,4 @@ module.exports = (gulp, plugins, config) => {
 	watcher.on('update', bundle);
 
 	return bundle;
-}
+};

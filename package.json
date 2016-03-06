@@ -33,10 +33,13 @@
     "gulp-help": "^1.6.1",
     "gulp-load-plugins": "^1.2.0",
     "gulp-plumber": "^1.1.0",
+    "run-sequence": "^1.1.5",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "ramda": "^0.19.1"
+    "kefir": "^3.2.1",
+    "ramda": "^0.19.1",
+    "ramda-fantasy": "^0.4.1"
   }
 }
