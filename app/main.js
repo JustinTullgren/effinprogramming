@@ -14,18 +14,21 @@ const listen = _.curry((event, target) => {
 	return kefir.fromEvents(target, event);
 });
 
-// keyUpStream :: String -> Stream
+// keyUpStream :: IO DOM -> Stream
 const keypUpStream = listen('keyup');
 
 // getDom :: String -> IO
 const getDom = node => IO(() => document.getElementById(node)); // eslint-disable-line
 
-// eventValue :: DomEvent -> Stream String
-const eventValue = compose(map(_.prop('value')), map(_.prop('target')));
+// eventValue :: DomEvent -> String
+const eventValue = compose(_.prop('value'), _.prop('target'));
+
+// valueStream :: DomEvent -> Stream String
+const valueStream = compose(map(eventValue), keypUpStream);
 
 // IMPURE
 
 $(() => {
-	getDom('search').map(keypUpStream).map(eventValue).runIO().onValue(log);
+	getDom('search').map(valueStream).runIO().onValue(log);
 });
 
