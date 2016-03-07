@@ -15,7 +15,7 @@ const listen = _.curry((event, target) => {
 });
 
 // keyUpStream :: IO DOM -> Stream
-const keypUpStream = listen('keyup');
+const keyUpStream = listen('keyup');
 
 // getDom :: String -> IO
 const getDom = node => IO(() => document.getElementById(node)); // eslint-disable-line
@@ -24,11 +24,15 @@ const getDom = node => IO(() => document.getElementById(node)); // eslint-disabl
 const eventValue = compose(_.prop('value'), _.prop('target'));
 
 // valueStream :: DomEvent -> Stream String
-const valueStream = compose(map(eventValue), keypUpStream);
+const valueStream = compose(map(eventValue), keyUpStream);
+
+const createDom = text => $('<li></li>').html(text);
+
+const setDom = _.curry((selector, innerHTML) => $(selector).html(innerHTML));
 
 // IMPURE
 
 $(() => {
-	getDom('search').map(valueStream).runIO().onValue(log);
+	getDom('bindThis').map(valueStream).runIO().onValue(compose(setDom('#results'), createDom));
 });
 
